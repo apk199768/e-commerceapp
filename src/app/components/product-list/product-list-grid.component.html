@@ -1,0 +1,52 @@
+
+<div class="container-fluid" style="padding-top: 70px;">
+    <div class="row" >
+         <div *ngFor="let prodt of products" class="col-sm-3">
+            <div class="col-sm-md-1">
+                <a routerLink="/products/{{prodt.id}}" ><img src={{prodt.image_url}}/>
+                </a>
+            </div>
+            <div class="col-sm-md-1">
+                <a routerLink="/products/{{prodt.id}}" style="font-style: normal;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-color: black;">{{prodt.name}}</a>
+            </div>
+            <div class="col-sm-md-1">    <a routerLink="/products/{{prodt.id}}">{{prodt.unit_price}}</a>
+            </div>
+            <div class="col-sm-md-1">
+                <button (click)="addtoCartItem(prodt)" class="btn btn-primary">Add to cart</button>
+            </div>
+        </div>
+        <div *ngIf="products?.length==0" class="alert alert-warning col-md-12" role="alert" style="margin-top:100px ;">
+            No Products found.
+                    </div>
+    </div>
+   <div class="footer-pagination">
+    <div class="row">
+            <div class="row">
+                <div class="col-sm-9" style="padding-top: 30px;">
+                <ngb-pagination [(page)]="thePageNo"
+                 [pageSize]="thePageSize"
+                  [collectionSize]="theTotalElements"
+                  [maxSize]=5
+                  [boundaryLinks]="true" 
+                  (pageChange)='listProduct()'>
+
+                </ngb-pagination>
+                </div>
+                <div class="col-sm-3" style="text-align: right;padding-top: 30px;">
+                <span class="mr-2">Page Size</span>
+                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                    <option >2</option>
+                    <option selected="true">5</option>
+                    <option >10</option>
+                    <option >20</option>
+                    <option >50</option>
+                 
+                </select>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+

@@ -1,0 +1,14 @@
+<div class="detail-section">
+<div class="container-fluid" *ngIf="product && product.image_url" >
+        <img src="{{product.image_url}}" class="detail-img"/>
+    <h3 style="margin-top: 10px;">
+      {{product.name}}
+    </h3>
+    <div class="price">{{product.unit_price|currency:"USD"}}</div>
+<button (click)="addtoCartItem(product)" type="secondary">Add to cart</button>
+<hr>
+<h4>Description</h4>
+<div><p >{{product.description}}</p></div>
+
+</div>
+</div>

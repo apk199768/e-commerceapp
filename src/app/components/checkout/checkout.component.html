@@ -1,0 +1,380 @@
+<div class="main-content page-m">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form [formGroup]="checkoutFormGroup">
+                <div formGroupName="customer" class="form-area">
+                    <h3>Customer</h3>
+                    <div class="row">
+                        <div class="col-md-3"><label>First Name</label></div>
+                        <div class="col-md-8">
+                            <div class="input-space">
+                                <input formControlName="firstName" type="text">
+                                <div *ngIf="firstName?.invalid && (firstName?.dirty||firstName?.touched)" >
+                                    <div *ngIf="firstName?.errors?.['required'] || firstName?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                        First Name is required
+
+                                    </div>
+                                    <div *ngIf="firstName?.errors?.['minlength']" class="alert alert-danger mt-1">
+                                        First Name is length is invalid.
+
+                                    </div>
+                                
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"><label>Last Name</label>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-space">
+                                <input formControlName="lastName" type="text">
+                                <div *ngIf="lastName?.invalid && (lastName?.touched||lastName?.dirty)" >
+                                    <div *ngIf="lastName?.errors?.['required'] ||lastName?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                        Last Name is required
+
+                                    </div>
+                                    <div *ngIf="lastName?.errors?.['minlength']"class="alert alert-danger mt-1">
+                                        Last Name is length is invalid.
+
+                                    </div>
+                                
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"><label>Email</label>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-space">
+                                <input formControlName="email" type="text">
+                                <div *ngIf="email?.invalid && (email?.touched||email?.dirty)" >
+                                    <div *ngIf="email?.errors?.['required']||email?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                        Email is required
+
+                                    </div>
+                                    <div *ngIf="email?.errors?.['pattern']"class="alert alert-danger mt-1">
+                                        Email format is inavlid.
+
+                                    </div>
+                                
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                        <!--shipping Address-->
+                        <div formGroupName="shippingAddress" class="form-area">
+                            <h3>Shipping Address</h3>
+                            <div class="row">
+                                <div class="col-md-3"><label>Country</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="country" type="text" (change)="getStates('shippingAddress')">
+                                            <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                                        </select>
+                                        <div *ngIf="shippingAddressCountry?.invalid && (shippingAddressCountry?.touched||shippingAddressCountry?.dirty)" >
+                                            <div *ngIf="shippingAddressCountry?.errors?.['required']"class="alert alert-danger mt-1">
+                                                Country is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+        
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Street</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="street" type="text">
+                                        <div *ngIf="shippingAddressStreet?.invalid && (shippingAddressStreet?.touched||shippingAddressStreet?.dirty)" >
+                                            <div *ngIf="shippingAddressStreet?.errors?.['required']||shippingAddressStreet?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                Street is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>City</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="city" type="text">
+                                        <div *ngIf="shippingAddressCity?.invalid && (shippingAddressCity?.touched||shippingAddressCity?.dirty)" >
+                                            <div *ngIf="shippingAddressCity?.errors?.['required']||shippingAddressCity?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                City is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>State</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="state" type="text">
+                                            <option *ngFor="let state of shippingAddressState">{{state.name}}</option>
+                                        </select>
+                                        <div *ngIf="shippingAddressStates?.invalid && (shippingAddressStates?.touched||shippingAddressStates?.dirty)" >
+                                            <div *ngIf="shippingAddressStates?.errors?.['required'] "class="alert alert-danger mt-1">
+                                                State is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Zip-Code</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="zipCode" type="text">
+                                        <div *ngIf="shippingAddressZipCode?.invalid && (shippingAddressZipCode?.touched||shippingAddressZipCode?.dirty)" >
+                                            <div *ngIf="shippingAddressZipCode?.errors?.['required']||shippingAddressZipCode?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                Zip-Code is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                              </div>
+                                
+                         </div>
+                         <!--Add check box to copy shipping to billing-->
+                         <div class="input-space">
+                            <label class="au-checkbox">
+                                <input (change)="copyShippingtoBilling($event)" type="checkbox">
+                                <span class="au-checkmark"></span>Billing Address same as Shipping Address
+
+                            </label>
+                          
+                        </div>
+                         <!--Billing Address-->
+                         <div formGroupName="billingAddress" class="form-area">
+                            <h3>Billing Address</h3>
+                            <div class="row">
+                                <div class="col-md-3"><label>Country</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="country" type="text" (change)="getStates('billingAddress')">
+                                            <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                                        </select>
+                                        <div *ngIf="billingAddressCountry?.invalid && (billingAddressCountry?.touched||billingAddressCountry?.dirty)" >
+                                            <div *ngIf="billingAddressCountry?.errors?.['required']"class="alert alert-danger mt-1">
+                                                Country is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Street</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="street" type="text">
+                                        <div *ngIf="billingAddressStreet?.invalid && (billingAddressStreet?.touched||billingAddressStreet?.dirty)">
+                                            <div *ngIf="billingAddressStreet?.errors?.['required']||billingAddressStreet?.errors?.['notOnlyWhiteSpaces']" class="alert alert-danger mt-1">
+                                                Street is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>City</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="city" type="text">
+                                        <div *ngIf="billingAddressCity?.invalid && (billingAddressCity?.touched||billingAddressCity?.dirty)" >
+                                            <div *ngIf="billingAddressCity?.errors?.['required']||billingAddressCity?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                City is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>State</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="state" type="text">
+                                            <option *ngFor="let state of billingAddressState">{{state.name}}</option>
+                                        </select>       <div *ngIf="billingAddressStates?.invalid && (billingAddressStates?.touched||billingAddressStates?.dirty)">
+                                            <div *ngIf="billingAddressStates?.errors?.['required']" class="alert alert-danger mt-1">
+                                                State is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div></div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Zip-Code</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="zipCode" type="text">
+                                        <div *ngIf="billingAddressZipCode?.invalid && (billingAddressZipCode?.touched||billingAddressZipCode?.dirty)">
+                                            <div *ngIf="billingAddressZipCode?.errors?.['required']||billingAddressZipCode?.errors?.['notOnlyWhiteSpaces']" class="alert alert-danger mt-1">
+                                                Zip-Code is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                              </div>
+                                
+                         </div>
+                         <!-- <div formGroupName="creditCard" class="form-area">
+                            <h3>Credit Card</h3>
+                            <div class="row">
+                                <div class="col-md-3"><label>Card Type</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="cardType" type="text">
+                                            <option>Visa</option>
+                                            <option>MasterCard</option>
+                                            <option>Discover</option>
+                                        </select>
+                                        <div *ngIf="cardType?.invalid && (cardType?.touched||cardType?.dirty)" >
+                                            <div *ngIf="cardType?.errors?.['required']||cardType?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                Card Type is required
+        
+                                            </div>
+                                                                     
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Name On Card</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="nameOnCard" type="text">
+                                        <div *ngIf="nameOnCard?.invalid && (nameOnCard?.touched||nameOnCard?.dirty)" >
+                                            <div *ngIf="nameOnCard?.errors?.['required'] ||nameOnCard?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                               Name is required
+        
+                                            </div>
+                                            <div *ngIf="nameOnCard?.errors?.['minlength']"class="alert alert-danger mt-1">
+                                                Name length is invalid.
+        
+                                            </div>
+                                        
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Card Number</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="cardNumber" type="text">
+                                        <div *ngIf="cardNumber?.invalid && (cardNumber?.touched||cardNumber?.dirty)" >
+                                            <div *ngIf="cardNumber?.errors?.['required']||cardNumber?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                Card Number is required
+        
+                                            </div>
+                                            <div *ngIf="cardNumber?.errors?.['pattern']" class="alert alert-danger mt-1">
+                                                Card Number format is inavlid.
+        
+                                            </div>
+                                        
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Security Code</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <input formControlName="securityCode" type="text">
+                                        <div *ngIf="securityCode?.invalid && (securityCode?.touched||securityCode?.dirty)" >
+                                            <div *ngIf="securityCode?.errors?.['required']||securityCode?.errors?.['notOnlyWhiteSpaces']"class="alert alert-danger mt-1">
+                                                Security Code is required
+        
+                                            </div>
+                                            <div *ngIf="securityCode?.errors?.['pattern']"class="alert alert-danger mt-1">
+                                                ecurity Code format is inavlid.
+        
+                                            </div>
+                                        
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Expiration Month</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="expirationMonth" type="text">
+                                            <option *ngFor="let month of creditCardMonths">{{month}}</option>
+                                        </select></div>
+        
+                                </div>
+                                <div class="col-md-3"><label>Expiration Year</label></div>
+                                <div class="col-md-8">
+                                    <div class="input-space">
+                                        <select formControlName="expirationYear" type="text" (change)="handleMonthsAndYears()">
+                                            <option *ngFor="let year of creditCardYears">{{year}}</option>
+                                        </select>
+        
+                                    </div>
+        
+                                </div>
+                              </div>
+                                
+                         </div> -->
+                         <!--Stripe Credit Card-->
+                         <div formGroupName="creditCard" class="form-area">
+                            <h3>Credit or Debit Card</h3>
+                            <div id="card-elements"></div>
+                            <div id="card-errors" class="displayError.textContent!=='':'alert alert-danger mt-1">
+
+                            </div>
+                         </div>
+                         <div class="form-area">
+                            <h3>Review Your Order</h3>
+                         <p>Total Quantity:{{totalQuantity}}</p>
+                         <p>Shipping: FREE</p>
+                         <p>Total Price:{{totalPrice| currency:'USD'}}</p></div>
+                        <!--Submit button-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info" (click)="OnSubmit()" >Purchase</button>
+                        </div>
+
+                    
+
+                
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

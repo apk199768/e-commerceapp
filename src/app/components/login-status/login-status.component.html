@@ -1,0 +1,10 @@
+<div class="login-status-header">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <asl-google-signin-button *ngIf="!user" type='icon' size='large'></asl-google-signin-button>
+    <div *ngIf="user" class="login-status-user-info">
+        Welcome Back 
+        {{user.name}}
+      
+    </div>
+    <button *ngIf="user"(click)="logOut()" class='security-btn' >Logout</button>
+</div>
